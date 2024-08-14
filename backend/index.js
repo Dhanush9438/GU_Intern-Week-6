@@ -1,14 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+require('dotenv').config();  // Load environment variables
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // Connect to MongoDB
-const mongoURI = 'mongodb+srv://dhanushcse12:dhanushcse12@cluster0.vnpi1.mongodb.net/food';
+const mongoURI = process.env.MONGO_URI;
 
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(mongoURI)
   .then(() => {
     console.log('Connected to MongoDB');
   })
@@ -128,5 +129,3 @@ app.delete('/api/food-items/:id', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-
