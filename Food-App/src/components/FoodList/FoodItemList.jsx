@@ -1,5 +1,5 @@
 import React from 'react';
-import './foodItemList.css'; 
+import './FoodItemList.css'; 
 
 const FoodItemList = ({ foodItems, onEdit, onDelete }) => {
   return (
