@@ -1,6 +1,5 @@
 import React from 'react';
-import './FoodItemDetail.css'; // Style as needed
-
+import './FoodItemDetail.css'; 
 const FoodItemDetail = ({ foodItem, onClose }) => {
   if (!foodItem) return null;
 

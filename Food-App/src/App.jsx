@@ -27,6 +27,7 @@ const App = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`/food-items/${id}`);
+      window.alert("Deleted Successfully");
       fetchFoodItems();
     } catch (err) {
       console.error(err);
@@ -55,7 +56,7 @@ const App = () => {
         foodItems={foodItems} 
         onEdit={handleEdit} 
         onDelete={handleDelete} 
-        onView={handleView} // Pass the handleView function to FoodItemList
+        onView={handleView} 
       />
       {isDetailVisible && <FoodItemDetail foodItem={selectedFoodItem} onClose={handleClose} />}
     </div>
