@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://gu-intern-week-6-food-app.onrender.com/api',
+  baseURL: 'https://food-app-v9n2.onrender.com/api',
   headers: {
     'Content-Type': 'application/json',
   },
