@@ -76,7 +76,7 @@ const FoodItemForm = ({ fetchFoodItems, foodItem }) => {
         bestPractices: formData.bestPractices.split(',').map((b) => b.trim()),
       };
 
-      const response = await fetch(foodItem ? `http://localhost:5000/api/food-items/${foodItem._id}` : 'http://localhost:5000/api/food-items', {
+      const response = await fetch(foodItem ? `https://gu-intern-week-6-food-app.onrender.com/api/food-items/${foodItem._id}` : 'https://gu-intern-week-6-food-app.onrender.com/api/food-items', {
         method: foodItem ? 'PUT' : 'POST',
         headers: {
           'Content-Type': 'application/json',
