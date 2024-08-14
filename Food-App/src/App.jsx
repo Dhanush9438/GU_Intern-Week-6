@@ -8,6 +8,7 @@ import './App.css';
 const App = () => {
   const [foodItems, setFoodItems] = useState([]);
   const [selectedFoodItem, setSelectedFoodItem] = useState(null);
+  const [isDetailVisible, setIsDetailVisible] = useState(false);
 
   const fetchFoodItems = async () => {
     try {
@@ -20,6 +21,7 @@ const App = () => {
 
   const handleEdit = (foodItem) => {
     setSelectedFoodItem(foodItem);
+    setIsDetailVisible(false);
   };
 
   const handleDelete = async (id) => {
@@ -31,6 +33,16 @@ const App = () => {
     }
   };
 
+  const handleView = (foodItem) => {
+    setSelectedFoodItem(foodItem);
+    setIsDetailVisible(true);
+  };
+
+  const handleClose = () => {
+    setSelectedFoodItem(null);
+    setIsDetailVisible(false);
+  };
+
   useEffect(() => {
     fetchFoodItems();
   }, []);
@@ -39,10 +51,16 @@ const App = () => {
     <div className="app-container">
       <h1>Food and Nutrition Database</h1>
       <FoodItemForm fetchFoodItems={fetchFoodItems} foodItem={selectedFoodItem} />
-      <FoodItemList foodItems={foodItems} onEdit={handleEdit} onDelete={handleDelete} />
-      <FoodItemDetail foodItem={selectedFoodItem} />
+      <FoodItemList 
+        foodItems={foodItems} 
+        onEdit={handleEdit} 
+        onDelete={handleDelete} 
+        onView={handleView} // Pass the handleView function to FoodItemList
+      />
+      {isDetailVisible && <FoodItemDetail foodItem={selectedFoodItem} onClose={handleClose} />}
     </div>
   );
 };
 
 export default App;
+
