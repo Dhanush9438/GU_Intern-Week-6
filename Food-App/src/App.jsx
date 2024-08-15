@@ -21,7 +21,7 @@ const App = () => {
 
   const handleEdit = (foodItem) => {
     setSelectedFoodItem(foodItem);
-    setIsDetailVisible(false);
+    setIsDetailVisible(false); 
   };
 
   const handleDelete = async (id) => {
@@ -36,12 +36,12 @@ const App = () => {
 
   const handleView = (foodItem) => {
     setSelectedFoodItem(foodItem);
-    setIsDetailVisible(true);
+    setIsDetailVisible(true); 
   };
 
   const handleClose = () => {
     setSelectedFoodItem(null);
-    setIsDetailVisible(false);
+    setIsDetailVisible(false); 
   };
 
   useEffect(() => {
@@ -64,4 +64,3 @@ const App = () => {
 };
 
 export default App;
-

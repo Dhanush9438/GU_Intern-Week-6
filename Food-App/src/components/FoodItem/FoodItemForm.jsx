@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './FoodItemForm.css'
+import './FoodItemForm.css';
 
 const FoodItemForm = ({ fetchFoodItems, foodItem }) => {
   const [formData, setFormData] = useState({
@@ -47,6 +47,29 @@ const FoodItemForm = ({ fetchFoodItems, foodItem }) => {
         healthBenefits: foodItem.healthBenefits.join(', ') || '',
         bestPractices: foodItem.bestPractices.join(', ') || '',
       });
+    } else {
+
+      setFormData({
+        name: '',
+        group: '',
+        description: '',
+        calories: '',
+        protein: '',
+        fats: '',
+        carbohydrates: '',
+        vitamins: '',
+        minerals: '',
+        servingSize: '',
+        allergens: '',
+        ingredients: '',
+        preparationMethods: '',
+        certifications: '',
+        countryOfOrigin: '',
+        brand: '',
+        dietaryRestrictions: '',
+        healthBenefits: '',
+        bestPractices: '',
+      });
     }
   }, [foodItem]);
 
@@ -75,36 +98,39 @@ const FoodItemForm = ({ fetchFoodItems, foodItem }) => {
         healthBenefits: formData.healthBenefits.split(',').map((h) => h.trim()),
         bestPractices: formData.bestPractices.split(',').map((b) => b.trim()),
       };
-  
-      const response = await fetch(foodItem ? `https://food-app-v9n2.onrender.com/api/food-items/${foodItem._id}` : 'https://food-app-v9n2.onrender.com/api/food-items', {
-        method: foodItem ? 'PUT' : 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formattedData),
-      });
-  
+
+      const response = await fetch(
+        foodItem
+          ? `https://food-app-v9n2.onrender.com/api/food-items/${foodItem._id}`
+          : 'https://food-app-v9n2.onrender.com/api/food-items',
+        {
+          method: foodItem ? 'PUT' : 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formattedData),
+        }
+      );
+
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-  
+
       const result = await response.json();
       console.log('Response from server:', result);
-  
-      // Show an alert based on whether it's an update or create operation
+
       if (foodItem) {
         window.alert('Food item updated successfully!');
       } else {
         window.alert('Food item created successfully!');
       }
-  
+
       fetchFoodItems();
     } catch (err) {
       console.error('Error submitting form:', err.message);
       window.alert('An error occurred while submitting the form. Please try again.');
     }
   };
-  
 
   return (
     <form onSubmit={handleSubmit}>
